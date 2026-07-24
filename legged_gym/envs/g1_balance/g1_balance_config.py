@@ -192,7 +192,7 @@ class G1BalanceV0Cfg(G1RoughCfg):
 
 class G1BalanceV0CfgPPO(G1RoughCfgPPO):
     class policy(G1RoughCfgPPO.policy):
-        init_noise_std = 0.8
+        init_noise_std = 0.4
         actor_hidden_dims = [128, 128]
         critic_hidden_dims = [128, 128]
 
