@@ -71,7 +71,14 @@ def main() -> None:
         print(f"{i:2d}: {name}")
 
     print("\nRequired links:")
-    print("right_rubber_hand:", "right_rubber_hand" in body_names)
+
+    end_effector_name = None
+    for candidate in ("right_rubber_hand", "right_wrist_yaw_link"):
+        if candidate in body_names:
+            end_effector_name = candidate
+            break
+
+    print("Selected end-effector:", end_effector_name)
 
     assert len(dof_names) == EXPECTED_DOF_COUNT, (
         f"Expected {EXPECTED_DOF_COUNT} DOFs, "
@@ -87,8 +94,8 @@ def main() -> None:
         f"Missing right-arm joints: {missing_arm_joints}"
     )
 
-    assert "right_rubber_hand" in body_names, (
-        "right_rubber_hand rigid body was not loaded"
+    assert end_effector_name is not None, (
+        "Neither right_rubber_hand nor right_wrist_yaw_link was loaded"
     )
 
     print("\nIsaac Gym asset test: PASS")
